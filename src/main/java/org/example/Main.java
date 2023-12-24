@@ -17,7 +17,8 @@ public class Main {
                 String[] parts = line.split(" "); //split each line into array
                 if(parts.length == 51) { //lines being used should be array length 51
                     String name = parts[0]; //name(last) will always be in the first element
-                    System.out.println("NAME: " + name);
+                    String soundexKey = SoundexKey.keyMaker(name);
+                    System.out.println("NAME: " + name + " SOUNDEX KEY: " + soundexKey);
                 }
             }
         }
