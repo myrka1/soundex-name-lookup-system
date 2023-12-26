@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 public class SoundexKeyTest {
 
     @org.junit.Test
-    public void keyMaker() {
+    public void keyMaker() { //tests that correct soundexkey for a name is returned
         SoundexKey soundexMaker = new SoundexKey();
 
         String name1 = "Briggs";
@@ -26,7 +26,7 @@ public class SoundexKeyTest {
     }
 
     @org.junit.Test
-    public void letterCheck() {
+    public void letterCheck() { //for correct letter check
         SoundexKey soundexMaker = new SoundexKey();
 
         Character letter1 = 'h';
