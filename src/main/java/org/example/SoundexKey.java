@@ -15,7 +15,7 @@ public class SoundexKey {
         for(int i = 0; i < name.length(); i++) {
             int current = letterCheck(name.charAt(i));
             //skip double digits, don't add 7's
-            if(temp != current && temp != 7) key.append(current);
+            if(current != temp && current != 7) key.append(current);
             temp = current;
         }
         //replace first digit with first letter of name
