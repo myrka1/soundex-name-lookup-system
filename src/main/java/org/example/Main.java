@@ -3,7 +3,10 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.FileReader;
+import java.nio.Buffer;
 import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,10 +29,44 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        File fileName = new File("soundex_names_file.txt");
+        if(!fileName.exists()) {
+            try {
+                fileName.createNewFile();
+                outputToFile(namesMap,fileName); //file creation for output
+            } catch(IOException e) {
+                System.out.println("File not created");
+            }
+        }
         namesMap.display();
         System.out.println();
 
         userStuff(namesMap);
+    }
+
+    private static void outputToFile(KeysMap namesMap,File filePath) {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            //Redirect to file
+            System.setOut(new java.io.PrintStream(new java.io.OutputStream() {
+                @Override
+                public void write(int x) {
+                    try {
+                        writer.write(x);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, true));
+            //display will print to file
+            namesMap.display();
+            //undo the redirect
+            System.setOut(new java.io.PrintStream(new java.io.FileOutputStream(java.io.FileDescriptor.out)));
+            System.out.println("FILE DONE");
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void userStuff(KeysMap namesMap) {
